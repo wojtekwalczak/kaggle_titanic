@@ -7,8 +7,7 @@ class DataInspector(TransformerMixin):
 
     def transform(self, X, **transform_params):
         with pd.option_context('display.max_rows', 999, 'display.max_columns', 999):
-            print(X)
-
+            print(X.columns)
         return X
 
     def fit(self, X, y=None, **fit_params):

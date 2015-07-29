@@ -1,20 +1,16 @@
+from __future__ import print_function
 
-import numpy as np
 import pandas as pd
 from sklearn.base import TransformerMixin
 
-fare_mean = None
 
-class FareFiller(TransformerMixin):
+class PClassTransformer(TransformerMixin):
 
     def transform(self, features_raw, **transform_params):
         features = features_raw.copy(deep=True)
-        global fare_mean
-        if fare_mean is None:
-            fare_mean = int(features.Fare.mean())
-        features.Fare.fillna(fare_mean, axis=0, inplace=True)
-        return features
-
+        dummies = pd.get_dummies(features.Pclass, prefix='Pclass')
+        features.drop('Pclass', axis=1, inplace=True)
+        return pd.concat([features, pd.DataFrame(dummies)], axis=1)
 
     def fit(self, X, y=None, **fit_params):
         return self
