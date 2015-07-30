@@ -6,11 +6,16 @@ scaler = MinMaxScaler()
 
 class Scaler(TransformerMixin):
 
-    def transform(self, X, **transform_params):
-        return scaler.fit_transform(X)
+    def __init__(self, use=True):
+        self.use = use
+
+    def transform(self, features_raw, **transform_params):
+        if self.use:
+            return scaler.fit_transform(features_raw)
+        return features_raw
 
     def fit(self, X, y=None, **fit_params):
         return self
 
     def get_params(self, *args, **kwargs):
-        return {}
+        return { 'use': self.use }

@@ -7,8 +7,8 @@ import pandas as pd
 
 data = pd.read_csv('../../data/train.csv', dtype={"Age": np.float64})
 
-features = data[['Pclass', 'Name', u'Age', u'SibSp', u'Parch', u'Fare', u'Cabin',
-                 u'Embarked', u'Sex']]
+features = data[['Pclass', 'Name', 'Age', 'SibSp', 'Parch', 'Fare', 'Cabin',
+                 'Embarked', 'Sex']]
 
 target = data.Survived.values
 

@@ -1,10 +1,10 @@
 
-from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.pipeline import Pipeline
 from sklearn.feature_selection import SelectKBest
 from sklearn.feature_selection import f_classif, chi2
 from sklearn.decomposition import TruncatedSVD
 
+from titanic.classifiers.ClassifierGetter import ClassifierGetter
 from titanic.transformers.Scaler import Scaler
 from titanic.transformers.DataInspector import DataInspector
 from titanic.transformers.CabinDummyTransformer import CabinDummyTransformer
@@ -22,17 +22,16 @@ pipeline = Pipeline([
     ('column_picker', ColumnPicker()),
     ('sex_transformer', SexTransformer()),
     ('age_filler', AgeFiller()),
-    ('pclass_transformer', PClassTransformer()),
-    ('embarked_transformer', EmbarkedTransformer()),
-    ('family_counter', FamilyCounter()),
-    ('cabin_transformer', CabinDummyTransformer(complex=False)),
-    ('name_transformer', NameTransformer()),
+    ('pclass_transformer', PClassTransformer(use=False)),
+    ('embarked_transformer', EmbarkedTransformer(use=False)),
+    ('family_counter', FamilyCounter(use=False)),
+    ('cabin_transformer', CabinDummyTransformer(use=False)),
+    ('name_transformer', NameTransformer(use=False)),
     ('fare_filler', FareFiller()),
-    ('ngram', NGramsTransformer()),
-    #('data_inspector', DataInspector()),
-    ('scaler', Scaler()),
-    #('select_features', SelectKBest(f_classif, k=50)),
+    ('name_ngrams', NGramsTransformer(use=True)),
+    ('data_inspector', DataInspector(use=False)),
+    ('scaler', Scaler(use=False)),
+    #('select_features', SelectKBest(f_classif, k=5)),
     ('svd', TruncatedSVD(n_components=15)),
-    ('classifier',  GradientBoostingClassifier(n_estimators=100, learning_rate=0.05,
-                                        subsample=.25, max_features=.5))])
-
+    ('classifier',  ClassifierGetter('gbc').get_classifier())
+])

@@ -5,13 +5,17 @@ from sklearn.base import TransformerMixin
 
 class EmbarkedTransformer(TransformerMixin):
 
+    def __init__(self, use=True):
+        self.use = use
+
     def transform(self, features, **transform_params):
-        embarked = pd.get_dummies(features.Embarked, prefix='Embarked')
-        features = pd.concat([features,
-                              pd.DataFrame(embarked.Embarked_C),
-                              pd.DataFrame(embarked.Embarked_Q),
-                              pd.DataFrame(embarked.Embarked_S)],
-                             axis=1)
+        if self.use:
+            embarked = pd.get_dummies(features.Embarked, prefix='Embarked')
+            features = pd.concat([features,
+                                  pd.DataFrame(embarked.Embarked_C),
+                                  pd.DataFrame(embarked.Embarked_Q),
+                                  pd.DataFrame(embarked.Embarked_S)],
+                                 axis=1)
         features.drop('Embarked', axis=1, inplace=True)
         return features
 
@@ -19,4 +23,4 @@ class EmbarkedTransformer(TransformerMixin):
         return self
 
     def get_params(self, *args, **kwargs):
-        return {}
+        return { 'use': self.use }

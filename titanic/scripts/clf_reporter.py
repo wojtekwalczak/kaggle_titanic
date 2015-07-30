@@ -2,7 +2,7 @@
 from __future__ import print_function
 
 from sklearn.metrics import classification_report
-#from titanic.pipelines.basic_pipeline import pipeline
+
 from titanic.pipelines.basic_pipeline import pipeline
 from titanic.db.train_test_loader import x_test, x_train, y_test, y_train
 
