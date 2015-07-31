@@ -1,7 +1,10 @@
+"""Serves instances of pre-defined classifiers."""
 
-from titanic.classifiers.GradiendBoosting import GradiendBoosting
+from titanic.classifiers.LogisticRegressionClf import LogisticRegressionClf
+from titanic.classifiers.GradientBoostingClf import GradientBoostingClf
 
-classifiers = { 'gbc': GradiendBoosting }
+classifiers = { 'gbc': GradientBoostingClf,
+                'lr': LogisticRegressionClf }
 
 class ClassifierGetter(object):
 

@@ -19,3 +19,7 @@ class Scaler(TransformerMixin):
 
     def get_params(self, *args, **kwargs):
         return { 'use': self.use }
+
+    def set_params(self, **params):
+        if 'use' in params:
+            self.use = params.get('use')

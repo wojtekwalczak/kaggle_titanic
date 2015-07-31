@@ -2,7 +2,7 @@
 from __future__ import print_function
 
 from sklearn.grid_search import GridSearchCV
-from titanic.pipelines.basic_pipeline import pipeline
+from titanic.pipelines.gbc_pipeline import pipeline
 from titanic.db.loader import features, target
 
 gradient_boosting_parameters = {

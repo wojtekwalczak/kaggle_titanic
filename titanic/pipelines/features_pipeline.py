@@ -4,7 +4,6 @@ from sklearn.feature_selection import SelectKBest
 from sklearn.feature_selection import f_classif, chi2
 from sklearn.decomposition import TruncatedSVD
 
-from titanic.classifiers.ClassifierGetter import ClassifierGetter
 from titanic.transformers.Scaler import Scaler
 from titanic.transformers.DataInspector import DataInspector
 from titanic.transformers.CabinDummyTransformer import CabinDummyTransformer
@@ -18,7 +17,7 @@ from titanic.transformers.PClassTransformer import PClassTransformer
 from titanic.transformers.NGramsTransformer import NGramsTransformer
 from titanic.transformers.ColumnPicker import ColumnPicker
 
-pipeline = Pipeline([
+features_pipeline = Pipeline([
     ('column_picker', ColumnPicker()),
     ('sex_transformer', SexTransformer()),
     ('age_filler', AgeFiller()),
@@ -32,6 +31,5 @@ pipeline = Pipeline([
     ('data_inspector', DataInspector(use=False)),
     ('scaler', Scaler(use=False)),
     #('select_features', SelectKBest(f_classif, k=5)),
-    ('svd', TruncatedSVD(n_components=15)),
-    ('classifier',  ClassifierGetter('gbc').get_classifier())
+    ('svd', TruncatedSVD(n_components=15))
 ])
