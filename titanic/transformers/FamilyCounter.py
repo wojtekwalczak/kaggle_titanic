@@ -11,12 +11,12 @@ class FamilyCounter(TransformerMixin):
     def transform(self, features_raw, **transform_params):
         if self.use:
             features = features_raw.copy(deep=True)
-            Family = features_raw[['SibSp', 'Parch']]\
+            family = features_raw[['SibSp', 'Parch']]\
                 .apply(lambda x: x[0] + x[1], axis=1)
             features.drop('SibSp', axis=1, inplace=True)
             features.drop('Parch', axis=1, inplace=True)
             return pd.concat([features,
-                              pd.DataFrame({'Family': Family})], axis=1)
+                              pd.DataFrame({'Family': family})], axis=1)
         return features_raw
 
 
