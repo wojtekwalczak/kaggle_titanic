@@ -13,7 +13,7 @@ class GradientBoostingClf(object):
                                               max_features='log2',
                                               min_samples_leaf=2,
                                               min_samples_split=1,
-                                              n_estimators=2000,
+                                              n_estimators=1000,
                                               subsample=0.8,
                                               warm_start=True)
 

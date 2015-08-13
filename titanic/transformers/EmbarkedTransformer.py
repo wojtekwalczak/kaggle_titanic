@@ -13,7 +13,6 @@ class EmbarkedTransformer(TransformerMixin):
             embarked = pd.get_dummies(features.Embarked, prefix='Embarked')
             features = pd.concat([features,
                                   pd.DataFrame(embarked.Embarked_C),
-                                  pd.DataFrame(embarked.Embarked_Q),
                                   pd.DataFrame(embarked.Embarked_S)],
                                  axis=1)
         features.drop('Embarked', axis=1, inplace=True)

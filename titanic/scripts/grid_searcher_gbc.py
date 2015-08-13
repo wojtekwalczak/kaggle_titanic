@@ -6,14 +6,14 @@ from titanic.pipelines.gbc_pipeline import pipeline
 from titanic.db.loader import features, target
 
 gradient_boosting_parameters = {
-    'classifier__loss': ('exponential',),# ('deviance', 'exponential'),
-    'classifier__learning_rate': (0.001,),#, 0.1, 0.25, 0.5, 0.9),
-    'classifier__n_estimators': (500,),#(100, 250, 500),
-    'classifier__max_depth': (2, 3, 4, 5),
-    'classifier__subsample': (0.2, 0.5, 1.0),
+    'classifier__loss': ('deviance', 'exponential'),
+    'classifier__learning_rate': (0.001, 0.1, 0.25, 0.5, 0.9),
+    'classifier__n_estimators': (250, 1000, 2000),
+    'classifier__max_depth': (2, 3, 4, 5, 6),
+    'classifier__subsample': (0.2, 0.5, 0.9),
     'classifier__min_samples_leaf': (1, 2, 3),
     'classifier__min_samples_split': (1, 2, 3),
-    'classifier__max_features': ('log2',),# ('auto', 'sqrt', 'log2'),
+    'classifier__max_features': ('auto', 'sqrt', 'log2'),
     'classifier__warm_start': (True, False)
 }
 

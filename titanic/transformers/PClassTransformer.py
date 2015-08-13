@@ -14,6 +14,7 @@ class PClassTransformer(TransformerMixin):
             features = features.copy(deep=True)
             dummies = pd.get_dummies(features.Pclass, prefix='Pclass')
             features = pd.concat([features, pd.DataFrame(dummies)], axis=1)
+            features.drop('Pclass_3', axis=1, inplace=True)
         features.drop('Pclass', axis=1, inplace=True)
         return features
 

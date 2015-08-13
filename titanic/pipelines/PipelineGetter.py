@@ -13,13 +13,14 @@ from titanic.transformers.FamilyCounter import FamilyCounter
 from titanic.transformers.PClassTransformer import PClassTransformer
 from titanic.transformers.ColumnPicker import ColumnPicker
 from titanic.transformers.SurnameTransformer import SurnameTransformer
+from titanic.transformers.DummyTransformer import DummyTransformer
 
 
 class PipelineGetter(object):
 
     def __init__(self, pclass=True, embarked=True, family_count=True,
                  cabin=True, name=True, data_inspector=False, scaler=True,
-                 pca_n_components=20, pca_whiten=True):
+                 pca=True, pca_n_components=20, pca_whiten=True, surname=True):
         self.pipeline = Pipeline([
             ('column_picker', ColumnPicker()),
             ('sex_transformer', SexTransformer()),
@@ -30,10 +31,11 @@ class PipelineGetter(object):
             ('cabin_transformer', CabinDummyTransformer(use=cabin)),
             ('name_transformer', NameTransformer(use=name)),
             ('fare_filler', FareFiller()),
-            ('surname_transformer', SurnameTransformer()),
-            ('data_inspector', DataInspector(use=data_inspector)),
+            ('surname_transformer', SurnameTransformer(use=surname)),
             ('scaler', Scaler(use=scaler)),
-            ('pca', PCA(n_components=pca_n_components, whiten=pca_whiten))
+            ('data_inspector', DataInspector(use=data_inspector)),
+            ('pca', PCA(n_components=pca_n_components, whiten=pca_whiten)\
+                    if pca else DummyTransformer())
         ])
 
     def get_pipeline(self):
